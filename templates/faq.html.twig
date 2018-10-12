@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <h1>MAIN</h1>
+    {% for category in categories %}
+        {% set
+            subcategory1 =
+            category.name|replace({' ':'-'})|lower
+        %}
+
+        <a href="{{ path('subcategories1', {main: category.mainCategory, subcategory1: subcategory1, c: category.id }) }}" class="js-test">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+{% endblock %}

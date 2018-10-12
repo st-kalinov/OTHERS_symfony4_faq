@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    {% block categories %}
+        {% for entity in entities %}
+            {% set subcategory1 = subcategory1|replace({' ':'-'})|lower %}
+            {% set subcategory2 = entity.getName|replace({' ':'-'})|lower %}
+            {% set subcategory = entity.name|replace({' ':'-'})|lower %}
+             <a href="{{ path('subcategories2', {main: entity.mainCategory, subcategory1: subcategory1, subcategory2: subcategory2, c: entity.id}) }}">
+                 {{ entity.name }}
+             </a><hr>
+            {% if qas %}
+                {% for qa in qas %}
+                    <h5><b>{{ qa.question }}</b></h5>
+                    <p>{{ qa.answer }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endblock categories %}
+
+
+
+
+{% endblock body %}
