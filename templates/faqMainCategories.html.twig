@@ -2,20 +2,30 @@
 {% block body %}
     {{ parent() }}
     {% block categories %}
+        <section id="parent" class="panel-group">
         {% for entity in entities %}
             {% set subcategory1 = subcategory1|replace({' ':'-'})|lower %}
-            {% set subcategory2 = entity.getName|replace({' ':'-'})|lower %}
-            {% set subcategory = entity.name|replace({' ':'-'})|lower %}
-             <a href="{{ path('subcategories2', {main: entity.mainCategory, subcategory1: subcategory1, subcategory2: subcategory2, c: entity.id}) }}">
-                 {{ entity.name }}
-             </a><hr>
-            {% if qas %}
-                {% for qa in qas %}
-                    <h5><b>{{ qa.question }}</b></h5>
-                    <p>{{ qa.answer }}</p>
-                {% endfor %}
+            {% set subcategory2 = entity.name|replace({' ':'-'})|lower %}
+
+            {% if not entity.questionAnswers is empty %}
+                <button type="button" class="btn btn-primary" data-toggle="collapse"
+                        data-target="#questions">{{ entity.name }}</button>
+
+                <div id="questions" class="collapse card" data-parent="#parent">
+                    {% for qa in entity.questionAnswers %}
+                        <div class="card-body">
+                            <h5>{{ qa.question }}</h5><hr>
+                            <p>{{ qa.answer|raw }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                 <a href="{{ path('subcategories2', {main: entity.mainCategory, subcategory1: subcategory1, subcategory2: subcategory2, c: entity.id}) }}">
+                     {{ entity.name }}
+                 </a>
             {% endif %}
         {% endfor %}
+        </section>
     {% endblock categories %}
 
 

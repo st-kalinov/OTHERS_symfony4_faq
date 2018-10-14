@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('a').on('click', function (e) {
+    $('.js-test').on('click', function (e) {
 
         console.log("asd");
     });

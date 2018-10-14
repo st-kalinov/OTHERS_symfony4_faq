@@ -2,14 +2,33 @@
 {% block body %}
     {{ parent() }}
     <h1>MAIN</h1>
-    {% for category in categories %}
-        {% set
-            subcategory1 =
-            category.name|replace({' ':'-'})|lower
-        %}
+    <section>
 
-        <a href="{{ path('subcategories1', {main: category.mainCategory, subcategory1: subcategory1, c: category.id }) }}" class="js-test">
-            {{ category.name }}
-        </a>
-    {% endfor %}
+        {% for entity in entities %}
+
+            {% set
+                subcategory1 =
+                entity.name|replace({' ':'-'})|lower %}
+            {% if not entity.questionAnswers.isEmpty %}
+
+                <button type="button" class="btn btn-primary" data-toggle="collapse"
+                        data-target="#questions">{{ entity.name }}</button>
+
+                <div id="questions" class="collapse">
+                    {% for qa in entity.questionAnswers %}
+                        <h3>{{ qa.question }}</h3>
+                        <p>{{ qa.answer }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+
+                <a href="{{ path('subcategories1', {main: entity.mainCategory, subcategory1: subcategory1, c: entity.id }) }}"
+                   class="js-test">
+                    {{ entity.name }}
+                </a>
+
+            {% endif %}
+
+        {% endfor %}
+    </section>
 {% endblock %}

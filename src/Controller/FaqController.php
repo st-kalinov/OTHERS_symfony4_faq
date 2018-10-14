@@ -29,10 +29,15 @@ class FaqController extends AbstractController
     public function index()
     {
         $entity = $this->getDoctrine()->getManager()->getRepository(Category::class);
-        $categories = $entity->findBy(['parent_id' => null]);
+        $entities = $entity->findBy(['parent_id' => null]);
 
+       //foreach ($categories as $category)
+       //{
+       //    dump($category->getQuestionAnswers()->isEmpty());
+       //}
+       //die();
         return $this->render('faq.html.twig', [
-            'categories' => $categories
+            'entities' => $entities
         ]);
     }
 
@@ -40,19 +45,14 @@ class FaqController extends AbstractController
      * @Route("/faq/{main}/{subcategory1}", name="subcategories1")
      * @return Response
      */
-    public function subcategories1($subcategory1, $main, CategoryRepository $categoryRepository, Request $request)
+    public function subcategories1($main, $subcategory1, CategoryRepository $categoryRepository, Request $request)
     {
 
         //normalize category name
         $subcategory1 = ucwords(str_replace('-', ' ', $subcategory1));
         $c = $request->get('c');
-
-        //get questions and answers for that category, if there are any
-        $questionsAndAnswers = $categoryRepository->findOneBy(['id' => $c])->getQuestionAnswers();
-
         //get the subcategories objects if there are any
         $entities = $categoryRepository->findBy(['parent_id' => $c]);
-
 
        //dd($entities);
        //foreach ($entities as $entity) {
@@ -80,7 +80,6 @@ class FaqController extends AbstractController
             'main' => $main,
             'subcategory1' => $subcategory1,
             'entities' => $entities,
-            'qas' => $questionsAndAnswers,
         ]);
     }
 
@@ -138,6 +137,7 @@ class FaqController extends AbstractController
         //$questionsAndAnswers = $categoryEntity->getQuestionAnswers();
 
         return $this->render('faqMainCategories.html.twig', [
+            'main' => $main,
             'subcategory1' => $subcategory1,
             'subcategory2' => $subcategory2,
             'subcategory3' => $subcategory3,
