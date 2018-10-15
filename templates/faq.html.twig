@@ -22,8 +22,7 @@
                 </div>
             {% else %}
 
-                <a href="{{ path('subcategories1', {main: entity.mainCategory, subcategory1: subcategory1, c: entity.id }) }}"
-                   class="js-test">
+                <a href="{{ path('subcategories1', {main: entity.mainCategory, subcategory1: subcategory1, c: entity.id }) }}">
                     {{ entity.name }}
                 </a>
 

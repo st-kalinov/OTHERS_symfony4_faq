@@ -88,29 +88,20 @@ class FaqController extends AbstractController
      */
     public function subcategories2($main, $subcategory1, $subcategory2, CategoryRepository $categoryRepository, Request $request)
     {
-       //$attr = $request->attributes->all();
         $c = $request->get('c');
-       //$wildcard = [];
-       //foreach ($attr['_route_params'] as $route_param)
-       //{
-       //    $wildcard[] = $route_param;
-       //}
-       //array_shift($wildcard);
-       //dd($wildcard);
+
         $subcategory1 = ucwords(str_replace('-', ' ', $subcategory1));
         $subcategory2 = ucwords(str_replace('-', ' ', $subcategory2));
 
-        //$categoryEntity =  $categoryRepository->findOneBy(['main_category' => $main, 'name' => $subcategory]);
+
         $entities = $categoryRepository->findBy(['parent_id' => $c]);
 
-        //$questionsAndAnswers = $categoryEntity->getQuestionAnswers();
 
-        return $this->render('faqSubCategories.html.twig', [
+        return $this->render('faqMainCategories.html.twig', [
             'main' => $main,
             'subcategory1' => $subcategory1,
             'subcategory2' => $subcategory2,
             'entities' => $entities,
-            //'qas' => $questionsAndAnswers,
         ]);
     }
 
@@ -136,15 +127,30 @@ class FaqController extends AbstractController
 
         //$questionsAndAnswers = $categoryEntity->getQuestionAnswers();
 
-        return $this->render('faqMainCategories.html.twig', [
+        return $this->render('faqSubCategories.html.twig', [
             'main' => $main,
             'subcategory1' => $subcategory1,
             'subcategory2' => $subcategory2,
             'subcategory3' => $subcategory3,
             'entities' => $entities,
+
             //'qas' => $questionsAndAnswers
         ]);
     }
+
+    /**
+     * @Route("/faq/like", methods={"POST"})
+     */
+    public function like(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        return $this->json([
+            'id' => $data['id'],
+            'message' => 'Thanks for liking'
+        ]);
+    }
+
     /**
      * @Route("/faq/new", name="client_newsub_category")
      * @Route("/faq/new", name="notclient_newsub_category")
