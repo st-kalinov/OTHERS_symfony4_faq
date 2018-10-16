@@ -3,12 +3,7 @@
     {{ parent() }}
     <h1>MAIN</h1>
     <section>
-
         {% for entity in entities %}
-
-            {% set
-                subcategory1 =
-                entity.name|replace({' ':'-'})|lower %}
             {% if not entity.questionAnswers.isEmpty %}
 
                 <button type="button" class="btn btn-primary" data-toggle="collapse"
@@ -21,11 +16,9 @@
                     {% endfor %}
                 </div>
             {% else %}
-
-                <a href="{{ path('subcategories1', {main: entity.mainCategory, subcategory1: subcategory1, c: entity.id }) }}">
+                <a href="{{ path('subcategories1', {main: entity.mainCategory, c: entity.id }) }}">
                     {{ entity.name }}
                 </a>
-
             {% endif %}
 
         {% endfor %}

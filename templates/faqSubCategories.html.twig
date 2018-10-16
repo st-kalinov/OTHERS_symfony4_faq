@@ -64,4 +64,8 @@
             {% endfor %}
         </section>
     {% endblock categories %}
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/showQuestions.js') }}"></script>
+    {% endblock %}
 {% endblock body %}

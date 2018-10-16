@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\QuestionAnswerRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ReactionReasonRepository")
  */
-class QuestionAnswer
+class ReactionReason
 {
     /**
      * @ORM\Id()
@@ -19,23 +19,17 @@ class QuestionAnswer
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="questionAnswers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $question;
+    private $reason;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=50)
      */
-    private $answer;
+    private $reaction_category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\QuestionReaction", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionReaction", mappedBy="reaction")
      */
     private $questionReactions;
 
@@ -50,38 +44,26 @@ class QuestionAnswer
         return $this->id;
     }
 
-    public function getCategory(): ?Category
+    public function getReason(): ?string
     {
-        return $this->category;
+        return $this->reason;
     }
 
-    public function setCategory(?Category $category): self
+    public function setReason(string $reason): self
     {
-        $this->category = $category;
+        $this->reason = $reason;
 
         return $this;
     }
 
-    public function getQuestion(): ?string
+    public function getReactionCategory(): ?string
     {
-        return $this->question;
+        return $this->reaction_category;
     }
 
-    public function setQuestion(string $question): self
+    public function setReactionCategory(string $reaction_category): self
     {
-        $this->question = $question;
-
-        return $this;
-    }
-
-    public function getAnswer(): ?string
-    {
-        return $this->answer;
-    }
-
-    public function setAnswer(string $answer): self
-    {
-        $this->answer = $answer;
+        $this->reaction_category = $reaction_category;
 
         return $this;
     }
@@ -98,7 +80,7 @@ class QuestionAnswer
     {
         if (!$this->questionReactions->contains($questionReaction)) {
             $this->questionReactions[] = $questionReaction;
-            $questionReaction->setQuestion($this);
+            $questionReaction->setReaction($this);
         }
 
         return $this;
@@ -109,12 +91,11 @@ class QuestionAnswer
         if ($this->questionReactions->contains($questionReaction)) {
             $this->questionReactions->removeElement($questionReaction);
             // set the owning side to null (unless already changed)
-            if ($questionReaction->getQuestion() === $this) {
-                $questionReaction->setQuestion(null);
+            if ($questionReaction->getReaction() === $this) {
+                $questionReaction->setReaction(null);
             }
         }
 
         return $this;
     }
-
 }

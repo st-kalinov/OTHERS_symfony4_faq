@@ -4,22 +4,25 @@
     {% block categories %}
         <section id="category_parent">
         {% for entity in entities %}
-            {% set subcategory1 = subcategory1|replace({' ':'-'})|lower %}
-            {% set subcategory2 = entity.name|replace({' ':'-'})|lower %}
+            {% set categoryName = entity.name|replace({' ':'-'})|lower %}
 
             {% if not entity.questionAnswers is empty %}
                 <button type="button" class="btn btn-primary" data-toggle="collapse"
-                        data-target="#q_{{ subcategory2 }}">{{ entity.name }}</button>
+                        data-target="#q_{{ categoryName }}">{{ entity.name }}</button>
 
-                <div id="q_{{ subcategory2 }}" class="collapse card" data-parent="#category_parent">
+                <div id="q_{{ categoryName }}" class="collapse card" data-parent="#category_parent">
                     {% for qa in entity.questionAnswers %}
                         <div class="card-body">
                             <h5>{{ loop.index }}. {{ qa.question }}</h5><hr>
                             <p>{{ qa.answer|raw }}</p>
-                            <div class="like-dislike">
+                            {% for qReaction in qa.questionReactions %}
+                                <p>{{ qReaction.getReaction.reason }}</p>
+                            {% endfor %}
+
+                            <div class="like-dislike js-like-dislike">
                                 <i class="fa fa-thumbs-up" data-question="{{ qa.id }}"></i>
-                                <i class="fa fa-thumbs-down" data-toggle="modal" data-target="#myModal" data-question="{{ qa.id }}"></i>
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" >
+                                <i class="fa fa-thumbs-down" data-toggle="modal" data-target="#myModal_{{ qa.id }}" data-question="{{ qa.id }}"></i>
+                                <div class="modal fade" id="myModal_{{ qa.id }}" tabindex="-1" role="dialog">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -41,7 +44,6 @@
                                                     </div>
                                                 </form>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -51,15 +53,22 @@
                     {% endfor %}
                 </div>
             {% else %}
-                 <a href="{{ path('subcategories2', {main: entity.mainCategory, subcategory1: subcategory1, subcategory2: subcategory2, c: entity.id}) }}">
+                 <a href="{{ path('subcategories1', {main: entity.mainCategory, c: entity.id}) }}">
                      {{ entity.name }}
                  </a>
             {% endif %}
         {% endfor %}
         </section>
     {% endblock categories %}
-
-
-
-
 {% endblock body %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/questionReaction.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $parent = $('#category_parent');
+
+            var reaction = new Reaction($parent);
+        });
+    </script>
+{% endblock javascripts %}
