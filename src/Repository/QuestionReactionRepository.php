@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\QuestionReaction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,9 +20,8 @@ class QuestionReactionRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionReaction::class);
     }
 
-//    /**
-//     * @return QuestionReaction[] Returns an array of QuestionReaction objects
-//     */
+
+
     /*
     public function findByExampleField($value)
     {

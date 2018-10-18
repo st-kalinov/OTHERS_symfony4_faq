@@ -19,18 +19,38 @@ class ReactionReasonRepository extends ServiceEntityRepository
         parent::__construct($registry, ReactionReason::class);
     }
 
-    public function getReasonsNames(): array
+    /**
+     * Array with keys "MainCategories" and subkeys "reason name" and values "count"
+     *
+     * @return array
+     */
+    public function getReasonsAsCategories(): array
     {
+        $reactions = $this->getMainCategories();
         $objects = $this->findAll();
-        $reactions = [];
+
+
         foreach ($objects as $obj)
         {
-            $reactions[$obj->getId()] = $obj->getReason();
+            $reactions[$obj->getReactionCategory()][$obj->getReason()] = 0;
         }
 
         return $reactions;
 
     }
+
+    public function getMainCategories(): array
+    {
+        $objects = $this->findAll();
+        $reactions = [];
+        foreach ($objects as $obj)
+        {
+            $reactions[$obj->getReactionCategory()] = null;
+        }
+
+        return $reactions;
+    }
+
 //    /**
 //     * @return ReactionReason[] Returns an array of ReactionReason objects
 //     */
