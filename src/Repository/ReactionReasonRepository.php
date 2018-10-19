@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ReactionReason;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -24,7 +25,7 @@ class ReactionReasonRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function getReasonsAsCategories(): array
+    public function getReasonsNamesAsCategories(): array
     {
         $reactions = $this->getMainCategories();
         $objects = $this->findAll();
@@ -49,6 +50,24 @@ class ReactionReasonRepository extends ServiceEntityRepository
         }
 
         return $reactions;
+    }
+
+    public function getReactionsObjAsCategories()
+    {
+        $categories = $this->getMainCategories();
+        $reactions = [];
+
+        foreach ($categories as $category => $val)
+        {
+            $reactions[$category] = $this->findBy(['reaction_category' => $category]);
+        }
+
+        return $reactions;
+    }
+
+    private function getOrCreateQueryBuilder(QueryBuilder $qb = null)
+    {
+        return $qb ?: $this->createQueryBuilder('a');
     }
 
 //    /**

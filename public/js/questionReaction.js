@@ -28,7 +28,7 @@
        questionLike: function (e) {
          var $questionThumb = $(e.currentTarget);
          var datata = {
-             id: $questionThumb.data('question')
+             id: $questionThumb.data('reaction')
          };
 
          $.ajax({
@@ -78,14 +78,22 @@
                 $form.next().html('EMPTY');
             }
 
-           var formValues = {};
-           $.each($form, function (id, fieldData) {
+           var formValues = {id: $form.data('question')};
+           $.each($formSerialize, function (id, fieldData) {
                formValues[fieldData.name] = fieldData.value;
            });
 
            console.log(formValues);
+           //$.ajax({
+           //   url: 'http://127.0.0.1:8000/faq/reaction/dislike',
+           //    method: "POST",
+           //    data: JSON.stringify(formValues)
+           //}).done(function (data) {
+//
+           //}).fail(function () {
+           //   alert("FAIL");
+           //});
         }
-
 
     });
 

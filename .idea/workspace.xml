@@ -4,10 +4,9 @@
     <list default="true" id="34424e9c-0bdb-4b7c-8b08-96d2e15410b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/questionReaction.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/questionReaction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/showQuestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/showQuestions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/FaqController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FaqController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/QuestionReactionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/QuestionReactionRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/ReactionReasonRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ReactionReasonRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/faq.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/faq.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/faqMainCategories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/faqMainCategories.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,14 +22,15 @@
     <session id="1711626441">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="11" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -40,9 +40,9 @@
           <entry key="faqSubCategories" value="1" />
           <entry key="js" value="4" />
           <entry key="lock" value="1" />
-          <entry key="php" value="47" />
+          <entry key="php" value="49" />
           <entry key="ts" value="1" />
-          <entry key="twig" value="26" />
+          <entry key="twig" value="27" />
           <entry key="yaml" value="2" />
         </counts>
       </usages-collector>
@@ -50,9 +50,9 @@
         <counts>
           <entry key=".env file" value="5" />
           <entry key="JavaScript" value="4" />
-          <entry key="PHP" value="47" />
+          <entry key="PHP" value="49" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Twig" value="25" />
+          <entry key="Twig" value="26" />
           <entry key="TypeScript" value="1" />
           <entry key="YAML" value="2" />
         </counts>
@@ -61,19 +61,19 @@
         <counts>
           <entry key="env" value="15" />
           <entry key="faqSubCategories" value="27" />
-          <entry key="js" value="3043" />
-          <entry key="php" value="7880" />
-          <entry key="twig" value="5615" />
+          <entry key="js" value="3186" />
+          <entry key="php" value="8455" />
+          <entry key="twig" value="5833" />
           <entry key="yaml" value="67" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="15" />
-          <entry key="JavaScript" value="3043" />
-          <entry key="PHP" value="7880" />
+          <entry key="JavaScript" value="3186" />
+          <entry key="PHP" value="8455" />
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Twig" value="5636" />
+          <entry key="Twig" value="5854" />
           <entry key="YAML" value="67" />
         </counts>
       </usages-collector>
@@ -89,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/FaqController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="-206">
+              <caret line="76" column="11" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
               <folding>
                 <element signature="e#128#152#0#PHP" expanded="true" />
               </folding>
@@ -101,8 +101,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Repository/ReactionReasonRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="266">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/faq.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/faqMainCategories.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="514">
+              <caret line="33" column="68" lean-forward="true" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -117,28 +135,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/statistic.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/faqMainCategories.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="846">
-              <caret line="47" column="99" selection-start-line="47" selection-start-column="99" selection-end-line="47" selection-end-column="99" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/QuestionReaction.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+            <state relative-caret-position="424">
+              <caret line="40" column="64" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -155,8 +155,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/questionReaction.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+            <state relative-caret-position="126">
+              <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -164,20 +164,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/QuestionAnswer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1692">
+            <state relative-caret-position="406">
               <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
               <folding>
                 <element signature="e#30#78#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -194,6 +185,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>mai</find>
+      <find>getReasonsAsCategories</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -210,7 +202,6 @@
         <option value="$PROJECT_DIR$/templates/faqSubCategories" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/templates/faqSubCategories.html.twig" />
-        <option value="$PROJECT_DIR$/templates/faq.html.twig" />
         <option value="$PROJECT_DIR$/templates/js.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/404_not_found.html.twig" />
@@ -222,6 +213,7 @@
         <option value="$PROJECT_DIR$/templates/statistic.html.twig" />
         <option value="$PROJECT_DIR$/public/js/showQuestions.js" />
         <option value="$PROJECT_DIR$/src/Repository/QuestionReactionRepository.php" />
+        <option value="$PROJECT_DIR$/templates/faq.html.twig" />
         <option value="$PROJECT_DIR$/src/Repository/ReactionReasonRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/FaqController.php" />
         <option value="$PROJECT_DIR$/templates/faqMainCategories.html.twig" />
@@ -449,16 +441,18 @@
       <workItem from="1539670333059" duration="24227000" />
       <workItem from="1539756367768" duration="28641000" />
       <workItem from="1539843926723" duration="624000" />
+      <workItem from="1539954502335" duration="6431000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160701000" />
+    <option name="totallyTimeSpent" value="167132000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16950959" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17110874" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -635,41 +629,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/faq.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/ReactionReason.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FaqController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
-          <folding>
-            <element signature="e#128#152#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/ReactionReasonRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/QuestionReactionRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -680,17 +643,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/faqMainCategories.html.twig">
+    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="846">
-          <caret line="47" column="99" selection-start-line="47" selection-start-column="99" selection-end-line="47" selection-end-column="99" />
+        <state relative-caret-position="180">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/QuestionReaction.php">
+    <entry file="file://$PROJECT_DIR$/templates/faq.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+        <state relative-caret-position="108">
+          <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -703,7 +666,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/QuestionAnswer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1692">
+        <state relative-caret-position="406">
           <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
           <folding>
             <element signature="e#30#78#0#PHP" expanded="true" />
@@ -711,17 +674,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/QueryBuilder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        <state relative-caret-position="137">
+          <caret line="1091" column="20" selection-start-line="1091" selection-start-column="20" selection-end-line="1091" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/QuestionReaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="40" column="64" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/QuestionReactionRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/ReactionReasonRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/faqMainCategories.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="33" column="68" lean-forward="true" selection-start-line="33" selection-start-column="68" selection-end-line="33" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/FaqController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-206">
+          <caret line="76" column="11" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="11" />
+          <folding>
+            <element signature="e#128#152#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/questionReaction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+        <state relative-caret-position="126">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
         </state>
       </provider>
     </entry>

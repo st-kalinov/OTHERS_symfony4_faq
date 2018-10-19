@@ -61,7 +61,7 @@ class FaqController extends AbstractController
 
         //get the subcategories objects if there are any
         $entities = $categoryRepository->findBy(['parent_id' => $c]);
-        $dislikeReactions = $reactionReason->findBy(['reaction_category' => 'dislike']);
+        $reactionsAsCategories = $reactionReason->getReactionsObjAsCategories();
 
         if(!$entities)
         {
@@ -73,7 +73,7 @@ class FaqController extends AbstractController
         return $this->render('faqMainCategories.html.twig', [
             'main' => $main,
             'entities' => $entities,
-            'dislikeReactions' => $dislikeReactions
+            'reactions' => $reactionsAsCategories
         ]);
     }
 
@@ -104,7 +104,32 @@ class FaqController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/faq/reaction", name="question_reaction", methods={"POST"})
+     */
+    public function questionReaction(Request $request, QuestionAnswerRepository $qa, ReactionReasonRepository $reactionReason)
+    {
+        $data = json_decode($request->getContent(), true);
 
+        if($data === null || empty($data))
+        {
+            throw new BadRequestHttpException('Invalid JSON');
+        }
+
+        $question = $qa->findOneBy(['id' => $data['id']]);
+        $reason = $reactionReason->findOneBy(['reason' => 'Like', 'reaction_category' => $_category]);
+
+        $qaReaction = new QuestionReaction();
+        $qaReaction->setQuestion($question)->setReaction($reason);
+
+        $this->getDoctrine()->getManager()->persist($qaReaction);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json([
+            'question' => $question->getId(),
+            'reason' => $reason->getId()
+        ]);
+    }
     /**
      * @Route("/faq/reaction/dislike", name="question_reaction_dislike", methods={"POST"})
      */
@@ -158,7 +183,7 @@ class FaqController extends AbstractController
 
         $questionReactions = $questionObj->getQuestionReactions();
 
-        $reasons = $reactionReason->getReasonsAsCategories();
+        $reasons = $reactionReason->getReasonsNamesAsCategories();
 
         foreach ($questionReactions as $reactionObj)
         {
@@ -189,7 +214,7 @@ class FaqController extends AbstractController
 
         $questionReactions = $questionObj->getQuestionReactions();
 
-        $reasons = $reactionReason->getReasonsAsCategories();
+        $reasons = $reactionReason->getReasonsNamesAsCategories();
 
         foreach ($questionReactions as $reactionObj)
         {
