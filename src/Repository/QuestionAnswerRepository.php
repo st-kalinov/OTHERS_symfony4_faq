@@ -19,10 +19,6 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionAnswer::class);
     }
 
-    public function questionStatistic($id)
-    {
-
-    }
 //    /**
 //     * @return QuestionAnswer[] Returns an array of QuestionAnswer objects
 //     */

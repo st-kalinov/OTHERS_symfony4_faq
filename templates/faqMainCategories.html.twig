@@ -1,14 +1,26 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {{ parent() }}
-    {% block categories %}
-        <section id="category_parent">
-        {% for entity in entities %}
-            {% set categoryName = entity.name|replace({' ':'-'})|lower %}
+    <section id="category_parent">
+        <section id="categories">
+            {% for entity in entities %}
+                {% set categoryName = entity.name|replace({' ':'-'})|lower %}
 
-            {% if not entity.questionAnswers is empty %}
-                <button type="button" class="btn btn-primary" data-toggle="collapse"
-                        data-target="#q_{{ categoryName }}">{{ entity.name }}</button>
+
+                    {% if not entity.questionAnswers is empty %}
+                        <button type="button" class="btn btn-primary" data-toggle="collapse"
+                                data-target="#q_{{ categoryName }}">{{ entity.name }}</button>
+                    {% else %}
+                        <a href="{{ path('subcategories1', {main: entity.mainCategory, c: entity.id}) }}">
+                            {{ entity.name }}
+                        </a>
+                    {% endif %}
+
+            {% endfor %}
+        </section>
+        <section id="answers">
+            {% for entity in entities %}
+                {% set categoryName = entity.name|replace({' ':'-'})|lower %}
 
                 <div id="q_{{ categoryName }}" class="collapse card" data-parent="#category_parent">
                     {% for qa in entity.questionAnswers %}
@@ -17,9 +29,6 @@
                             <p>{{ qa.answer|raw }}</p>
 
                             <button type="button" class="btn btn-info" data-id={{ qa.id }}>Statistic</button>
-                            {# {% for qReaction in qa.questionReactions %}
-                                <p>{{ qReaction.getReaction.reactionCategory }} ------- {{ qReaction.getReaction.reason }}</p>
-                            {% endfor %}#}
 
                             <div class="like-dislike js-like-dislike">
                                <i class="fa fa-thumbs-up" data-reaction="{{ reactions['like'][0].id }}"></i>
@@ -32,10 +41,10 @@
                                                 <h5 class="modal-title" id="exampleModalLabel">What's wrong with this answer ?</h5>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="js-dislike-form" data-question="{{ qa.id }}">
+                                                <form class="js-dislike-form">
                                                     {% for dislike in reactions['dislike'] %}
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" data-reaction="{{ dislike.id }}" value="{{ dislike.reason }}" id="exampleCheck{{ loop.index }}">
+                                                            <input class="form-check-input" type="checkbox" name="dislike{{ loop.index }}" value="{{ dislike.id }}" id="exampleCheck{{ loop.index }}" data-reaction="{{ dislike.id }}">
                                                             <label class="form-check-label" for="exampleCheck{{ loop.index }}">{{ dislike.reason }}</label>
                                                         </div>
                                                     {% endfor %}
@@ -54,20 +63,12 @@
                             </div>
                         </div>
                     {% endfor %}
-
                 </div>
-
-            {% else %}
-                 <a href="{{ path('subcategories1', {main: entity.mainCategory, c: entity.id}) }}">
-                     {{ entity.name }}
-                 </a>
-            {% endif %}
-
-        {% endfor %}
+            {% endfor %}
         </section>
-
-    {% endblock categories %}
+    </section>
 {% endblock body %}
+
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/questionReaction.js') }}"></script>

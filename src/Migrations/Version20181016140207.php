@@ -15,6 +15,7 @@ final class Version20181016140207 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('CREATE TABLE question_reaction (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE question_reaction ADD question_id INT NOT NULL, ADD reaction_id INT NOT NULL');
         $this->addSql('ALTER TABLE question_reaction ADD CONSTRAINT FK_C7DFB7FB1E27F6BF FOREIGN KEY (question_id) REFERENCES question_answer (id)');
         $this->addSql('ALTER TABLE question_reaction ADD CONSTRAINT FK_C7DFB7FB813C7171 FOREIGN KEY (reaction_id) REFERENCES reaction_reason (id)');

@@ -30,23 +30,29 @@ class ReactionReasonRepository extends ServiceEntityRepository
         $reactions = $this->getMainCategories();
         $objects = $this->findAll();
 
-
         foreach ($objects as $obj)
         {
             $reactions[$obj->getReactionCategory()][$obj->getReason()] = 0;
         }
 
         return $reactions;
-
     }
 
     public function getMainCategories(): array
     {
-        $objects = $this->findAll();
+        $objects = $this->createQueryBuilder('a')
+            ->distinct()
+            ->select('a.reaction_category')
+            ->getQuery()
+            ->getResult();
+
         $reactions = [];
         foreach ($objects as $obj)
         {
-            $reactions[$obj->getReactionCategory()] = null;
+            foreach ($obj as $val)
+            {
+                $reactions[$val] = null;
+            }
         }
 
         return $reactions;

@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\QuestionAnswer;
 use App\Entity\QuestionReaction;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -21,6 +21,17 @@ class QuestionReactionRepository extends ServiceEntityRepository
     }
 
 
+    public function getQuestionReactions(QuestionAnswer $questionAnswer)
+    {
+        return $this->createQueryBuilder('qr')
+            ->leftJoin('qr.reaction', 'react')
+            ->select('react.reason')
+            ->andWhere('qr.question = :q')
+            ->setParameter('q', $questionAnswer->getId())
+            ->getQuery()
+            ->getResult();
+
+    }
 
     /*
     public function findByExampleField($value)

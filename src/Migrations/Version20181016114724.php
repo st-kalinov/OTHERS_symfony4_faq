@@ -16,6 +16,7 @@ final class Version20181016114724 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE reaction_reason (id INT AUTO_INCREMENT NOT NULL, reason VARCHAR(255) NOT NULL, reaction_category VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+
     }
 
     public function down(Schema $schema) : void
