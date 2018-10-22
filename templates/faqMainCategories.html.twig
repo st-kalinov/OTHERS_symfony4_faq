@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {{ parent() }}
+    <form action="{{ path('search', {'c': c, 'main': main}) }}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" name="search_box" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" style="margin-left: auto">SEARCH</button>
+    </form>
     <section id="category_parent">
+
         <section id="categories">
             {% for entity in entities %}
                 {% set categoryName = entity.name|replace({' ':'-'})|lower %}
-
 
                     {% if not entity.questionAnswers is empty %}
                         <button type="button" class="btn btn-primary" data-toggle="collapse"
@@ -19,48 +25,55 @@
             {% endfor %}
         </section>
         <section id="answers">
+
+
             {% for entity in entities %}
                 {% set categoryName = entity.name|replace({' ':'-'})|lower %}
 
                 <div id="q_{{ categoryName }}" class="collapse card" data-parent="#category_parent">
                     {% for qa in entity.questionAnswers %}
+                        {% set votedQuestions = app.session.get('voted') %}
                         <div class="card-body" data-question="{{ qa.id }}">
                             <h5>{{ loop.index }}. {{ qa.question }}</h5><hr>
                             <p>{{ qa.answer|raw }}</p>
 
-                            <button type="button" class="btn btn-info" data-id={{ qa.id }}>Statistic</button>
+                            <button type="button" class="btn btn-info">Statistic</button>
 
-                            <div class="like-dislike js-like-dislike">
-                               <i class="fa fa-thumbs-up" data-reaction="{{ reactions['like'][0].id }}"></i>
-                                <i class="fa fa-thumbs-down" data-toggle="modal" data-target="#myModal_{{ qa.id }}"></i>
+                            {% if qa.id in votedQuestions %}
+                                <p class="msg">Thanks</p>
+                            {% else %}
+                                <div class="like-dislike js-like-dislike">
+                                    <i class="fa fa-thumbs-up" data-reaction="{{ reactions['like'][0].id }}"></i>
+                                    <i class="fa fa-thumbs-down" data-toggle="modal" data-target="#myModal_{{ qa.id }}"></i>
 
-                                <div class="modal fade" id="myModal_{{ qa.id }}" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">What's wrong with this answer ?</h5>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="js-dislike-form">
-                                                    {% for dislike in reactions['dislike'] %}
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="dislike{{ loop.index }}" value="{{ dislike.id }}" id="exampleCheck{{ loop.index }}" data-reaction="{{ dislike.id }}">
-                                                            <label class="form-check-label" for="exampleCheck{{ loop.index }}">{{ dislike.reason }}</label>
+                                    <div class="modal fade" id="myModal_{{ qa.id }}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">What's wrong with this answer ?</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="js-dislike-form">
+                                                        {% for dislike in reactions['dislike'] %}
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" name="dislike{{ loop.index }}" value="{{ dislike.id }}" id="exampleCheck{{ loop.index }}">
+                                                                <label class="form-check-label" for="exampleCheck{{ loop.index }}">{{ dislike.reason }}</label>
+                                                            </div>
+                                                        {% endfor %}
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Send message</button>
                                                         </div>
-                                                    {% endfor %}
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Send message</button>
-                                                    </div>
-                                                </form>
-                                                <div class="alert alert-danger" role="alert" hidden></div>
+                                                    </form>
+                                                    <div class="alert alert-danger" role="alert" hidden></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <p class="msg"></p>
                                 </div>
-                                <p id="errors_{{ qa.id }}"></p>
-                                <p class="msg"></p>
-                            </div>
+                            {% endif %}
+
                         </div>
                     {% endfor %}
                 </div>
@@ -77,6 +90,7 @@
             $parent = $('#category_parent');
 
             var reaction = new Reaction($parent);
+
         });
     </script>
 {% endblock javascripts %}

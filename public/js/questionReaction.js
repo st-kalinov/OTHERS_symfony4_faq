@@ -19,7 +19,7 @@
         this.$questionsDivBlock.on(
           'submit',
           '.js-dislike-form',
-          this.dislikeFormSubmit.bind(this)
+          this.questionDislike.bind(this)
         );
     };
 
@@ -28,7 +28,6 @@
        questionLike: function (e) {
          var $questionThumb = $(e.currentTarget);
          var $block = $questionThumb.closest('.js-like-dislike');
-
          var $questionId = $questionThumb.closest('.card-body').data('question');
 
          var data = {
@@ -41,16 +40,18 @@
              method: 'POST',
              data: JSON.stringify(data)
          }).done(function (data) {
-             $block.find('.msg').html(data.message);
-             $questionThumb.css({'color':'green', 'font-size': '30px'});
-             $block.find('i.fa').prop('disabled', true);
+             $block.html('<p>Thanks</p>');
+
+            //$block.find('.msg').html(data.message);
+            //$questionThumb.css({'color':'green', 'font-size': '30px'});
+            //$block.find('i.fa').prop('disabled', true);
 
          }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(textStatus)
          });
        },
 
-        dislikeFormSubmit: function (e) {
+        questionDislike: function (e) {
             e.preventDefault();
             var $form = $(e.currentTarget);
             var $block = $form.closest('.js-like-dislike');
@@ -60,11 +61,11 @@
 
             var $formSerialize = $form.serializeArray();
 
-
             if($formSerialize.length === 0)
             {
                 $form.next().attr('hidden', false);
                 $form.next().html('EMPTY');
+                return;
             }
 
             var formValues = {
@@ -82,9 +83,10 @@
                 data: JSON.stringify(formValues)
             }).done(function (data) {
                 $form.closest('.modal').modal('toggle');
-                $block.find('.msg').html(data.message);
-                $block.find('.fa-thumbs-down').css({'color':'red', 'font-size': '30px'});
-                $block.find('i.fa').prop('disabled', true);
+                $block.html('<p>data.message</p>');
+                //$block.find('.msg').html(data.message);
+                //$block.find('.fa-thumbs-down').css({'color':'red', 'font-size': '30px'});
+                //$block.find('i.fa').prop('disabled', true);
             }).fail(function () {
                 alert("FAIL");
             });
@@ -92,8 +94,9 @@
 
         questionStatistic: function (e) {
              var $statisticBtn = $(e.currentTarget);
+             var questionId = $statisticBtn.closest('.card-body').data('question');
              var data = {
-                id: $statisticBtn.data('id')
+                 questionId: questionId
              };
 
              $.ajax({

@@ -4,7 +4,7 @@
     <h1>MAIN</h1>
     <section>
         {% for entity in entities %}
-            {% if not entity.questionAnswers.isEmpty %}
+           {# {% if not entity.questionAnswers.isEmpty %}
                 <button type="button" class="btn btn-primary" data-toggle="collapse"
                         data-target="#questions">{{ entity.name }}</button>
 
@@ -14,11 +14,11 @@
                         <p>{{ qa.answer }}</p>
                     {% endfor %}
                 </div>
-            {% else %}
+            {% else %} #}
                 <a href="{{ path('subcategories1', {main: entity.mainCategory, c: entity.id }) }}">
                     {{ entity.name }}
                 </a>
-            {% endif %}
+
 
         {% endfor %}
     </section>

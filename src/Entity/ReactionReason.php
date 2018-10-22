@@ -32,13 +32,14 @@ class ReactionReason
     private $reaction_category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\QuestionReaction", mappedBy="reaction")
+     * @ORM\ManyToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="reactions")
      */
-    private $questionReactions;
+    private $questions;
 
     public function __construct()
     {
         $this->questionReactions = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
 
@@ -72,31 +73,28 @@ class ReactionReason
     }
 
     /**
-     * @return Collection|QuestionReaction[]
+     * @return Collection|QuestionAnswer[]
      */
-    public function getQuestionReactions(): Collection
+    public function getQuestions(): Collection
     {
-        return $this->questionReactions;
+        return $this->questions;
     }
 
-    public function addQuestionReaction(QuestionReaction $questionReaction): self
+    public function addQuestion(QuestionAnswer $question): self
     {
-        if (!$this->questionReactions->contains($questionReaction)) {
-            $this->questionReactions[] = $questionReaction;
-            $questionReaction->setReaction($this);
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->addReaction($this);
         }
 
         return $this;
     }
 
-    public function removeQuestionReaction(QuestionReaction $questionReaction): self
+    public function removeQuestion(QuestionAnswer $question): self
     {
-        if ($this->questionReactions->contains($questionReaction)) {
-            $this->questionReactions->removeElement($questionReaction);
-            // set the owning side to null (unless already changed)
-            if ($questionReaction->getReaction() === $this) {
-                $questionReaction->setReaction(null);
-            }
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+            $question->removeReaction($this);
         }
 
         return $this;
