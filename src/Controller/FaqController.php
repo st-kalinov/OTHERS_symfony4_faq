@@ -94,33 +94,46 @@ class FaqController extends AbstractController
     }
 
     /**
-     * @Route("/faq/search/{main}/{c}", name="search", methods={"POST"})
+     * @Route("/faq/search/{main}", name="search", methods={"POST"})
      */
-    public function search($c, CategoryRepository $categoryRepository, Request $request)
+    public function search($main, CategoryRepository $categoryRepository, QuestionAnswerRepository $qaRepo, Request $request)
     {
-        //$searchedValue = $request->request->get('search_box');
+        $searchedValue = $request->request->get('search_box');
 
-        $subs = [];
-        $asd = true;
-        $subcategories = $categoryRepository->findBy(['parent_id' => $c]);
-        $subs = $this->testRec($subcategories, $categoryRepository, $subs);
+        $questions = [];
 
-        dd($subs);
+        $subcategories = $categoryRepository->findBy(['main_category' => $main]);
+        foreach ($subcategories as $subcategory)
+        {
+            $founded = $qaRepo->search($searchedValue, $subcategory->getId());
 
+            foreach ($founded as $found)
+            {
+                $questions[] = $found;
+            }
+        }
+
+        return $this->render('statistic.html.twig', [
+           'questions' => $questions
+        ]);
+
+        //$subs = $this->testRec($c, $categoryRepository);
+
+        //dd($questions);
     }
 
     /**
-     * @param Category[] $categories
      * @return Category[]|array
      */
-    public function testRec($categories, CategoryRepository $categoryRepository, $subs)
+    public function testRec($parentId, CategoryRepository $categoryRepository)
     {
-        foreach ($categories as $subcategory)
+        $subs = [];
+        $subcategories = $categoryRepository->findBy(['parent_id' => $parentId]);
+        foreach ($subcategories as $subcategory)
         {
             if(count($categoryRepository->findBy(['parent_id' => $subcategory->getId()])) > 0)
             {
-                $subcate = $categoryRepository->findBy(['parent_id' => $subcategory->getId()]);
-                $this->testRec($subcate, $categoryRepository, $subs);
+               $subs[] = $this->testRec($subcategory->getId(), $categoryRepository);
             }
             else {
                 $subs[] = $subcategory;
