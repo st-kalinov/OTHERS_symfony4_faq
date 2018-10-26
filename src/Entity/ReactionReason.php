@@ -32,16 +32,14 @@ class ReactionReason
     private $reaction_category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\QuestionAnswer", mappedBy="reactions")
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionReaction", mappedBy="reaction", orphanRemoval=true)
      */
-    private $questions;
+    private $questionReactions;
 
     public function __construct()
     {
         $this->questionReactions = new ArrayCollection();
-        $this->questions = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -73,30 +71,34 @@ class ReactionReason
     }
 
     /**
-     * @return Collection|QuestionAnswer[]
+     * @return Collection|QuestionReaction[]
      */
-    public function getQuestions(): Collection
+    public function getQuestionReactions(): Collection
     {
-        return $this->questions;
+        return $this->questionReactions;
     }
 
-    public function addQuestion(QuestionAnswer $question): self
+    public function addQuestionReaction(QuestionReaction $questionReaction): self
     {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-            $question->addReaction($this);
+        if (!$this->questionReactions->contains($questionReaction)) {
+            $this->questionReactions[] = $questionReaction;
+            $questionReaction->setReaction($this);
         }
 
         return $this;
     }
 
-    public function removeQuestion(QuestionAnswer $question): self
+    public function removeQuestionReaction(QuestionReaction $questionReaction): self
     {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
-            $question->removeReaction($this);
+        if ($this->questionReactions->contains($questionReaction)) {
+            $this->questionReactions->removeElement($questionReaction);
+            // set the owning side to null (unless already changed)
+            if ($questionReaction->getReaction() === $this) {
+                $questionReaction->setReaction(null);
+            }
         }
 
         return $this;
     }
+
 }

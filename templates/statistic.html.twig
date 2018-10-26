@@ -1,8 +1,16 @@
 {% extends 'base.html.twig' %}
+<<<<<<< HEAD
 {% block body %}
     {% for question in questions %}
         <h1>{{ question.question }}</h1>
         <p>{{ question.answer|raw }}</p>
     {% endfor %}
+=======
+>>>>>>> 5630818ee1385d75db060ac740b5f480fcec89a2
 
+{% block body %}
+    {% for question in questions %}
+        <h1>{{ question.question }}</h1>
+        <p>{{ question.answer|raw }}</p>
+    {% endfor %}
 {% endblock %}
