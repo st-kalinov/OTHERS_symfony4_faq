@@ -19,6 +19,16 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionAnswer::class);
     }
 
+    public function search($searchedValue, $categoryId)
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.question LIKE :value OR q.answer LIKE :value')
+            ->andWhere('q.category = :categoryId')
+            ->setParameter('categoryId', $categoryId)
+            ->setParameter('value', '%'.$searchedValue.'%')
+            ->getQuery()
+            ->getResult();
+    }
 //    /**
 //     * @return QuestionAnswer[] Returns an array of QuestionAnswer objects
 //     */

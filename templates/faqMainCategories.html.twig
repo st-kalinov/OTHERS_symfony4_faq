@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     {{ parent() }}
-    <form action="{{ path('search', {'c': c, 'main': main}) }}" method="post">
+    <form action="{{ path('search', {'main': main}) }}" method="post">
         <div class="form-group">
             <input type="text" class="form-control" name="search_box" placeholder="Search">
         </div>
@@ -25,14 +25,14 @@
             {% endfor %}
         </section>
         <section id="answers">
-
-
             {% for entity in entities %}
                 {% set categoryName = entity.name|replace({' ':'-'})|lower %}
 
                 <div id="q_{{ categoryName }}" class="collapse card" data-parent="#category_parent">
+                    {{ dump(app.request.cookies.get('voted')) }}
                     {% for qa in entity.questionAnswers %}
-                        {% set votedQuestions = app.session.get('voted') %}
+                        {% set votedQuestions = app.request.cookies.get('voted') %}
+
                         <div class="card-body" data-question="{{ qa.id }}">
                             <h5>{{ loop.index }}. {{ qa.question }}</h5><hr>
                             <p>{{ qa.answer|raw }}</p>

@@ -37,16 +37,14 @@ class QuestionAnswer
     private $answer;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ReactionReason", inversedBy="questions")
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionReaction", mappedBy="question", orphanRemoval=true)
      */
-    private $reactions;
+    private $questionReactions;
 
     public function __construct()
     {
         $this->questionReactions = new ArrayCollection();
-        $this->reactions = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -90,26 +88,31 @@ class QuestionAnswer
     }
 
     /**
-     * @return Collection|ReactionReason[]
+     * @return Collection|QuestionReaction[]
      */
-    public function getReactions(): Collection
+    public function getQuestionReactions(): Collection
     {
-        return $this->reactions;
+        return $this->questionReactions;
     }
 
-    public function addReaction(ReactionReason $reaction): self
+    public function addQuestionReaction(QuestionReaction $questionReaction): self
     {
-        if (!$this->reactions->contains($reaction)) {
-            $this->reactions[] = $reaction;
+        if (!$this->questionReactions->contains($questionReaction)) {
+            $this->questionReactions[] = $questionReaction;
+            $questionReaction->setQuestion($this);
         }
 
         return $this;
     }
 
-    public function removeReaction(ReactionReason $reaction): self
+    public function removeQuestionReaction(QuestionReaction $questionReaction): self
     {
-        if ($this->reactions->contains($reaction)) {
-            $this->reactions->removeElement($reaction);
+        if ($this->questionReactions->contains($questionReaction)) {
+            $this->questionReactions->removeElement($questionReaction);
+            // set the owning side to null (unless already changed)
+            if ($questionReaction->getQuestion() === $this) {
+                $questionReaction->setQuestion(null);
+            }
         }
 
         return $this;
